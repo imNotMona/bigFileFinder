@@ -4,3 +4,7 @@ outside of steam. It turned out there was a leftover timeshift of 65gigs sitting
 this when I moved timeshift storage to my HDD since its just a backup tool. The 'performance boost from SSD' of timeshift doesn't 
 even make sense since theres nothing really going on there. There was a leftover folder of a timeshift sync date from a few months 
 ago that never got deleted. 
+
+4/6/26
+Yeah I kind of put this project off,. but then I decided I'll get back to it. Today I set up the git repo for this storage
+I can track the progression of how my code changes.
