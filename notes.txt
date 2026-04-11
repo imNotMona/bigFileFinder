@@ -8,3 +8,63 @@ ago that never got deleted.
 4/6/26
 Yeah I kind of put this project off,. but then I decided I'll get back to it. Today I set up the git repo for this storage
 I can track the progression of how my code changes.
+
+4/8/2026
+
+I've run into my first 'real error' that isn't just a quick synatx fix or simple logic error. I'm pasting the exact
+terminal output of what I've got
+---------------------------------------------------------------------
+mona@monaPC:~/Downloads/sem4/csci4041/project1$ sudo python3 traversal.py /
+[sudo] password for mona:     
+Scanning: /
+Finding top 10 largest files...
+
+Traceback (most recent call last):
+  File "/home/mona/Downloads/sem4/csci4041/project1/traversal.py", line 41, in <module>
+    dfs_traverse(path, heap, k)
+  File "/home/mona/Downloads/sem4/csci4041/project1/traversal.py", line 21, in dfs_traverse
+    dfs_traverse(entry.path, heap, k)
+  File "/home/mona/Downloads/sem4/csci4041/project1/traversal.py", line 21, in dfs_traverse
+    dfs_traverse(entry.path, heap, k)
+  File "/home/mona/Downloads/sem4/csci4041/project1/traversal.py", line 21, in dfs_traverse
+    dfs_traverse(entry.path, heap, k)
+  [Previous line repeated 2 more times]
+  File "/home/mona/Downloads/sem4/csci4041/project1/traversal.py", line 10, in dfs_traverse
+    entries = list(os.scandir(root_path))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 22] Invalid argument: '/proc/5433/task/5433/net'
+mona@monaPC:~/Downloads/sem4/csci4041/project1$ 
+---------------------------------------------------------------------
+apparntly the '/proc' is some sort of virtual filesystem linux uses to assist programs reading hardware info. To prevent any similar isses,
+I went ahead and excluded four common directories it might run into that are not filled with actual files. Heres the list:
+/proc — information about running processes and the kernel
+/sys — hardware and driver settings
+/dev — device files
+/run — temporary runtime data for running services
+
+Now that it runs, the full scan took 6.26 seconds after a few runs. I don't know if cache files affect anything but I'm going to disconnect
+my PC from a power source next and re-run my code fresh after re-initializing memory.
+
+After a restart, the program ran for 65.76 seconds. Here are my results
+
+Scanning: /
+Finding top 10 largest files...
+
+Rank              Size  Path
+--------------------------------------------------------------------------------
+1             40.10 GB  /media/mona/hdd/SteamLibrary/steamapps/common/Monster Hunter World/chunk/chunkG0.bin
+2             38.61 GB  /home/mona/.local/share/Steam/steamapps/common/MonsterHunterWilds/re_chunk_000.pak
+3             33.39 GB  /media/mona/hdd/SteamLibrary/steamapps/common/Nioh/archive/archive_17.lnk
+4             31.15 GB  /media/mona/hdd/SteamLibrary/steamapps/common/Devil May Cry 5/re_chunk_000.pak
+5             30.02 GB  /media/mona/hdd/SteamLibrary/steamapps/common/MonsterHunterRise/re_chunk_000.pak
+6             21.34 GB  /home/mona/.local/share/Steam/steamapps/common/MonsterHunterWilds/re_chunk_000.pak.sub_000.pak.backup
+7             21.34 GB  /home/mona/.local/share/Steam/steamapps/common/MonsterHunterWilds/re_chunk_000.pak.sub_000.pak
+8             19.30 GB  /home/mona/.local/share/Steam/steamapps/common/MonsterHunterWilds/re_chunk_000.pak.patch_014.pak
+9             19.24 GB  /home/mona/.local/share/Steam/steamapps/common/ELDEN RING/Game/Data2.bdt
+10            17.05 GB  /media/mona/hdd/SteamLibrary/steamapps/common/Nioh/archive/archive_01.lnk
+
+
+Opposed to the built in disk viewer that comes with Linux Mint Cinnamon distro that took
+for drive 1 SSD
+for drive 2 HDD
+total of 

@@ -1,10 +1,13 @@
 import os
 import heapq
 
+SKIP_DIRS = {"/proc", "/sys", "/dev", "/run"}
 
 def dfs_traverse(root_path, heap, k):
     # walk through directory tree using depth-first search
     # it prints every file found along the way, and its size
+    if root_path in SKIP_DIRS:
+        return
 
     try: 
         entries = list(os.scandir(root_path))
@@ -30,14 +33,15 @@ def dfs_traverse(root_path, heap, k):
 if __name__ == "__main__":
     import sys
 
-    path  =  sys.argv[1] if len(sys.argv) > 1 else "."
-    k = int(sys.argv[2]) if len(sys.argv) > 2 else 10
+    paths = sys.argv[1:-1] if len(sys.argv) > 2 else [sys.argv[1]] if len(sys.argv) > 1 else ["."]
+    k = int(sys.argv[-1]) if len(sys.argv) > 2 else 10
 
-    print(f"Scanning: {path}")
+    print(f"Scanning: {', '.join(paths)}")
     print(f"Finding top {k} largest files...\n")
 
     heap = []
-    dfs_traverse(path, heap, k)
+    for path in paths:
+        dfs_traverse(path, heap, k)
 
     results = sorted(heap, reverse=True)
     
