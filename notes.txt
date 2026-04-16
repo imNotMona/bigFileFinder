@@ -65,6 +65,50 @@ Rank              Size  Path
 
 
 Opposed to the built in disk viewer that comes with Linux Mint Cinnamon distro that took
-for drive 1 SSD
-for drive 2 HDD
-total of 
+for drive 1 30.25 SSD
+for drive 2 104.90 HDD
+total of 135.15 seconds
+
+The program I wrote is much better in terms of time efficiency.
+For context, 
+drive 1 holds 420 GBs of files
+drive 2 holds 783 GBs of files
+
+One last thing before I end this off. Another goal of mine was to see what files I could safely send to HDD to have free storage.
+I was working with nearly 20 gigs of free storage for all read / write ops on my SSD where I where running monster hunter wilds from.
+Some context: it is not meant to be run on my rig (1660 TI super) and its quite a miracle that it runs at all. 
+With my program I used the command:
+ sudo python3 traversal.py /home/mona 20
+and got the following results:
+1             38.61 GB  /home/mona/.local/share/Steam/steamapps/common/MonsterHunterWilds/re_chunk_000.pak
+2             21.34 GB  /home/mona/.local/share/Steam/steamapps/common/MonsterHunterWilds/re_chunk_000.pak.sub_000.pak.backup
+3             21.34 GB  /home/mona/.local/share/Steam/steamapps/common/MonsterHunterWilds/re_chunk_000.pak.sub_000.pak
+4             19.30 GB  /home/mona/.local/share/Steam/steamapps/common/MonsterHunterWilds/re_chunk_000.pak.patch_014.pak
+5             19.24 GB  /home/mona/.local/share/Steam/steamapps/common/ELDEN RING/Game/Data2.bdt
+6             14.66 GB  /home/mona/.local/share/Steam/steamapps/common/ELDEN RING/Game/DLC.bdt
+7             12.97 GB  /home/mona/.local/share/Steam/steamapps/common/ELDEN RING/Game/Data1.bdt
+8             12.90 GB  /home/mona/Downloads/Monster Hunter Stories 3 [FitGirl HV Repack]/fg-01.bin
+9             12.36 GB  /home/mona/Downloads/Monster Hunter Stories 3 [FitGirl HV Repack]/fg-02.bin
+10            11.51 GB  /home/mona/Downloads/Monster Hunter Generations Ultimate/data/games/MHGU.nsp
+11            11.41 GB  /home/mona/.local/share/Steam/steamapps/common/MonsterHunterWilds/re_chunk_000.pak.patch_012.pak
+12            10.88 GB  /home/mona/.local/share/Steam/steamapps/common/ELDEN RING/Game/Data0.bdt
+13             8.16 GB  /home/mona/Downloads/software/demonsSouls/Demons Souls (USA)/Demon's Souls (USA).iso
+14             6.19 GB  /home/mona/.local/share/Steam/steamapps/common/MonsterHunterWilds/re_chunk_000.pak.patch_002.pak
+15             6.03 GB  /home/mona/Downloads/software/demonsSouls/Demons Souls (USA).zip
+16             5.09 GB  /home/mona/.local/share/Steam/steamapps/common/MonsterHunterWilds/re_chunk_000.pak.patch_006.pak
+17             4.17 GB  /home/mona/.local/share/Steam/steamapps/common/MonsterHunterWilds/re_chunk_000.pak.patch_004.pak
+18             4.08 GB  /home/mona/Downloads/Pokemon Legends - Z-A/data/games/PLZA.nsp
+19             4.01 GB  /home/mona/.local/share/Steam/steamapps/shadercache/2246340/nvidiav1/GLCache/293d8a4f5b6b83a0e952f43bbca67fe7/8f1cfe7f91f9bd15/steamapp_merged_shader_cache.bin
+20             3.14 GB  /home/mona/.local/share/Steam/steamapps/common/MonsterHunterWilds/re_chunk_000.pak.patch_010.pak
+
+This command yielded the top 20 largest files on my SSD
+With this information, I transferred items 8 and 9, saving another 24 Gigs of space.
+
+Though no FPS boost, there has been a DRASTIC improvement in the amount of stuttering, and loading times for high res textures
+
+Final Thoughts:
+Yes, there are many products that do similar things. However, my own program does 1 very specific thing. I don't need all the extra 
+features that other storage applications advertise. Something lightweight that does what it needs to is perfect for me, so here we are.
+In total, ~70 GBs of storage was offloaded, and granted a performance boost to an especially hardware intensive program. 
+I would consider it fruitful, and succesful.
+
