@@ -46,8 +46,15 @@ if __name__ == "__main__":
     # 2. If 1 arg: treat as path, default k=10.
     # 3. If no args: use current directory, default k=10.
 
-    paths = sys.argv[1:-1] if len(sys.argv) > 2 else [sys.argv[1]] if len(sys.argv) > 1 else ["."]
-    k = int(sys.argv[-1]) if len(sys.argv) > 2 else 10
+    if len(sys.argv) > 2 and sys.argv[-1].isdigit():
+        paths = sys.argv[1:-1]
+        k = int(sys.argv[-1])
+    elif len(sys.argv) >= 2:
+        paths = sys.argv[1:]
+        k = 10
+    else:
+        paths = ["."]
+        k = 10
 
     print(f"Scanning: {', '.join(paths)}")
     print(f"Finding top {k} largest files...\n")

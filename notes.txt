@@ -1,14 +1,15 @@
+==========================================================
 4/3/26
 I was going through my disk manually to see why in the world my SSD has 300 gigs of usage even though I had no real hefty programs
 outside of steam. It turned out there was a leftover timeshift of 65gigs sitting on my SSD the entire time. I thought I had fixed
 this when I moved timeshift storage to my HDD since its just a backup tool. The 'performance boost from SSD' of timeshift doesn't 
 even make sense since theres nothing really going on there. There was a leftover folder of a timeshift sync date from a few months 
 ago that never got deleted. 
-
+==========================================================
 4/6/26
 Yeah I kind of put this project off,. but then I decided I'll get back to it. Today I set up the git repo for this storage
 I can track the progression of how my code changes.
-
+==========================================================
 4/8/2026
 
 I've run into my first 'real error' that isn't just a quick synatx fix or simple logic error. I'm pasting the exact
@@ -73,6 +74,9 @@ The program I wrote is much better in terms of time efficiency.
 For context, 
 drive 1 holds 420 GBs of files
 drive 2 holds 783 GBs of files
+==========================================================
+4/15/2026
+
 
 One last thing before I end this off. Another goal of mine was to see what files I could safely send to HDD to have free storage.
 I was working with nearly 20 gigs of free storage for all read / write ops on my SSD where I where running monster hunter wilds from.
