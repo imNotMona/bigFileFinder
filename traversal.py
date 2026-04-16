@@ -2,13 +2,14 @@ import os
 import heapq
 
 SKIP_DIRS = {"/proc", "/sys", "/dev", "/run"}
+# these directories contain virtual file systems not containing any meaningful data
+# skips these on linux filesystems
 
 def dfs_traverse(root_path, heap, k):
-    # walk through directory tree using depth-first search
-    # it prints every file found along the way, and its size
+    # Recursively explores directories to find the largest files.
+    # Uses a min-heap to maintain only the top 'k' files efficiently.
     if root_path in SKIP_DIRS:
         return
-
     try: 
         entries = list(os.scandir(root_path))
     except PermissionError: 
@@ -18,20 +19,32 @@ def dfs_traverse(root_path, heap, k):
     for entry in entries:
         if entry.is_symlink():
             continue
-            # avoid breaking the loop
-
+            # Skip symlinks to prevent circular references or redundant scanning
         if  entry.is_dir():
+            # Recursive call to dive deeper into the directory tree
             dfs_traverse(entry.path, heap, k)
         
         else:
-            size = entry.stat().st_size
-            # print(f"{size:>15,} bytes {entry.path}")
-            heapq.heappush(heap, (size, entry.path))
-            if len(heap) > k:
-                heapq.heappop(heap)
+            try:
+                size = entry.stat().st_size
+                # Push current file onto heap. heapq stores smallest items at the top.
+                heapq.heappush(heap, (size, entry.path))
+
+                # If heap exceeds size k, remove the smallest item.
+                # This ensures the heap always contains the k largest files seen so far.
+                if len(heap) > k:
+                    heapq.heappop(heap)
+            except (OSError, FileNotFoundError):
+                # Handle cases where files disappear or are inaccessible during scan
+                continue
 
 if __name__ == "__main__":
     import sys
+
+    # Argument Parsing Logic:
+    # 1. If >2 args: everything except the last is a path; the last is 'k'.
+    # 2. If 1 arg: treat as path, default k=10.
+    # 3. If no args: use current directory, default k=10.
 
     paths = sys.argv[1:-1] if len(sys.argv) > 2 else [sys.argv[1]] if len(sys.argv) > 1 else ["."]
     k = int(sys.argv[-1]) if len(sys.argv) > 2 else 10
@@ -43,6 +56,7 @@ if __name__ == "__main__":
     for path in paths:
         dfs_traverse(path, heap, k)
 
+    # Sort the final heap in descending order for the final report
     results = sorted(heap, reverse=True)
     
     print(f"{'Rank':<6} {'Size':>15}  {'Path'}")
