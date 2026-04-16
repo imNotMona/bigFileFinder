@@ -116,3 +116,4 @@ features that other storage applications advertise. Something lightweight that d
 In total, ~70 GBs of storage was offloaded, and granted a performance boost to an especially hardware intensive program. 
 I would consider it fruitful, and succesful.
 
+
